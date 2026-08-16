@@ -1,0 +1,6 @@
+# ZeroErrorEnglish Robots.txt
+User-agent: *
+Allow: /
+Disallow: /admin.html
+
+Sitemap: https://zeroerrorenglish.com/sitemap.xml

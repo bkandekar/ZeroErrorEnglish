@@ -1,0 +1,65 @@
+name: Publish Scheduled Blog Posts
+
+# This workflow runs automatically every 30 minutes and on every push to the main branch.
+# It checks if any scheduled blog posts in the /posts/ folder have reached their publish date.
+# If a scheduled date has arrived, it changes the post status to "published", updates
+# posts-index.json, regenerates sitemap.xml & rss.xml, and commits the changes back to GitHub.
+
+on:
+  # Runs every 30 minutes (GitHub Actions cron schedule)
+  schedule:
+    - cron: '*/30 * * * *'
+  
+  # Runs immediately whenever you push new changes or merge to the main branch
+  push:
+    branches:
+      - main
+      - master
+
+  # Allows you to trigger this workflow manually anytime from the GitHub Actions tab
+  workflow_dispatch:
+
+# Permissions required to commit and push changes back to the repository
+permissions:
+  contents: write
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository files
+      - name: 📥 Check out repository code
+        uses: actions/checkout@v4
+        with:
+          # Fetch full history so commits can be pushed cleanly
+          fetch-depth: 0
+
+      # Step 2: Set up Node.js runtime environment (LTS)
+      - name: ⚙️ Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # Step 3: Run the ZeroErrorEnglish build script
+      # This script scans /posts/, publishes due posts, and generates posts-index.json, sitemap.xml, & rss.xml
+      - name: 🚀 Run build & auto-publish scheduler
+        run: node build.js
+
+      # Step 4: Check if any files were changed and commit them back
+      - name: 💾 Commit and push if scheduled posts were published
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          
+          # Stage all modified posts, posts-index.json, sitemap.xml, and rss.xml
+          git add posts/ posts-index.json sitemap.xml rss.xml robots.txt
+          
+          # Check if there are staged changes to commit
+          if git diff --staged --quiet; then
+            echo "✅ No scheduled posts to publish at this time. Repository is up to date."
+          else
+            git commit -m "🤖 Auto-publish scheduled blog posts & regenerate index [skip ci]"
+            git push origin HEAD:${{ github.ref_name }}
+            echo "🎉 Successfully published due posts and pushed update to ${{ github.ref_name }}!"
+          fi

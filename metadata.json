@@ -1,0 +1,6 @@
+{
+  "name": "ZeroErrorEnglish",
+  "description": "English grammar education brand & book store for Indian competitive exam aspirants.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -264,7 +264,6 @@ async function initSinglePostReader() {
   const relatedContainer = document.getElementById('relatedPostsContainer');
   const sidebarPosts = document.getElementById('sidebarPopularPosts');
   const sidebarBookWidget = document.getElementById('sidebarFeaturedBookWidget');
-postCoverImage.src = post.coverImage 
   const params = new URLSearchParams(window.location.search);
   const slug = params.get('slug');
 

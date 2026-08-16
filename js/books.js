@@ -31,8 +31,8 @@ const BOOKS_DATA = [
   },
   {
     id: "book-02-the-tenses-in-english-grammar ",
-    title: "Tenses & Time Aspects: The Sequence Blueprint",
-    subtitle: "Decode Conditional Sentences, Perfect Aspect Traps & Time Adverbial Triggers",
+    title: "The Tense In English Grammar:A Practical Grammar Guide ",
+    subtitle: "Decode  Perfect Aspect Traps & Time Adverbial Triggers",
     series: "Fasttrack English Grammar Series — Book 2",
     category: "Verbs & Tenses",
     topic: "Tenses & Conditionals",
@@ -42,7 +42,7 @@ const BOOKS_DATA = [
     rating: 4.8,
     reviews: 395,
     badge: "Must Read",
-    amazonUrl: "https://www.amazon.in/dp/B0EXAMPLE02",
+    amazonUrl: "https://amzn.to/4gzqBBt",
     coverImage: "img/book-02-the-tenses-in-english-grammar.webp",
     description: "Stop confusing Present Perfect with Simple Past. This comprehensive guide clarifies the Sequence of Tenses in subordinate clauses, Zero/1st/2nd/3rd/Mixed Conditionals, and tricky time conjunctions (since, for, until, by the time).",
     features: [

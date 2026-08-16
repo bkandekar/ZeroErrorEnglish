@@ -5,7 +5,7 @@
 
 const BOOKS_DATA = [
   {
-    id: "book-01-the-tense-in-english-grammar",
+    id: "book-1-the-tense-in-english-grammar",
     title: "The Tense In English Grammar : A Practical Grammar Guide",
     subtitle: "Complete Practical Guide to Master All English Tenses",
     series: "Fasttrack English Grammar Series — Book 1",
@@ -18,7 +18,7 @@ const BOOKS_DATA = [
     reviews: 320,
     badge: "Must Read",
     amazonUrl: "https://amzn.to/45vhuvu",
-    coverImage: "img/books/book-01-the-tense-in-english-grammar.jpg",
+    coverImage: "img/book-1-the-tense-in-english-grammar. webp",
     description: "A practical and comprehensive guide to mastering English tenses with clear explanations, examples and exam-oriented practice for competitive aspirants.",
     features: [
       "Clear explanation of all 12 tenses",

@@ -1,5 +1,26 @@
 [
   {
+    "id": "articles-before-vowel-sounds-an-hour",
+    "slug": "articles-before-vowel-sounds-an-hour",
+    "title": "Articles Before Vowel Sounds — Why 'An Hour' Is Correct But 'A Hour' Is Wrong",
+    "excerpt": "Still choosing 'a' or 'an' by looking at the first letter? That's the trap. The real rule is about sound, not spelling — and this one mistake costs students marks in Class 12 boards and every major competitive exam.",
+    "category": "Articles",
+    "tags": [
+      "Articles",
+      "A An The",
+      "SSC CGL",
+      "IBPS PO",
+      "Class 12",
+      "Rulebook"
+    ],
+    "coverImage": "img/books/book-XX-articles-vowel-sounds.jpg",
+    "author": "Balu Kandekar",
+    "readingTime": "5 min read",
+    "publishDate": "2026-08-16T08:00:00.000Z",
+    "createdDate": "2026-08-16T07:30:00.000Z",
+    "featured": true
+}
+  {
     "id": "conditional-sentences-if-clause-traps",
     "slug": "conditional-sentences-if-clause-traps",
     "title": "Conditional Sentences: How SSC & IBPS Trick You With 'Had + Would Have' Traps",

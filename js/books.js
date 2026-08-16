@@ -43,7 +43,7 @@ const BOOKS_DATA = [
     reviews: 395,
     badge: "Must Read",
     amazonUrl: "https://www.amazon.in/dp/B0EXAMPLE02",
-    coverImage: "img/books/book-02-the-tenses-in-english-grammar. webp",
+    coverImage: "img/books/book-02-the-tenses-in-english-grammar.webp",
     description: "Stop confusing Present Perfect with Simple Past. This comprehensive guide clarifies the Sequence of Tenses in subordinate clauses, Zero/1st/2nd/3rd/Mixed Conditionals, and tricky time conjunctions (since, for, until, by the time).",
     features: [
       "Timeline Diagrams for all 12 Tenses & Compound Aspects",

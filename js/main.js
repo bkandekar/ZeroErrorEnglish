@@ -260,6 +260,7 @@ async function initSinglePostReader() {
   const postDate = document.getElementById('postDateLabel');
   const postReadTime = document.getElementById('postReadTimeLabel');
   const postAuthor = document.getElementById('postAuthorLabel');
+  const postCoverImage = document.getElementById('postCoverImage');
   const tocList = document.getElementById('postTocList');
   const relatedContainer = document.getElementById('relatedPostsContainer');
   const sidebarPosts = document.getElementById('sidebarPopularPosts');
@@ -279,7 +280,12 @@ async function initSinglePostReader() {
   if (postDate) postDate.textContent = formatDate(post.publishDate);
   if (postReadTime) postReadTime.textContent = post.readingTime;
   if (postAuthor) postAuthor.textContent = post.author;
-
+if (postAuthor) postAuthor.textContent = post.author;
+  if (postCoverImage && post.coverImage) {
+    postCoverImage.src = post.coverImage;
+    postCoverImage.alt = post.title;
+    postCoverImage.style.display = 'block';
+  }
   // Render HTML Content
   if (articleContent) {
     articleContent.innerHTML = post.content || `<p>${post.excerpt}</p>`;

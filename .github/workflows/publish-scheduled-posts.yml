@@ -6,10 +6,9 @@ name: Publish Scheduled Blog Posts
 # posts-index.json, regenerates sitemap.xml & rss.xml, and commits the changes back to GitHub.
 
 on:
-  # Runs every 30 minutes (GitHub Actions cron schedule)
+  # Runs at exactly 9 AM, 12 PM, 6 PM, and 8 PM IST (converted to UTC)
   schedule:
-    - cron: '*/30 * * * *'
-  
+    - cron: '30 3,6,12,14 * * *'
   # Runs immediately whenever you push new changes or merge to the main branch
   push:
     branches:

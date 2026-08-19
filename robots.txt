@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 Disallow: /admin.html
 
-Sitemap: https://zeroerrorenglish.com/sitemap.xml
+Sitemap: https://bkandekar.github.io/ZeroErrorEnglish/sitemap.xml

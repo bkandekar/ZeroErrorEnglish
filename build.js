@@ -12,7 +12,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const SITE_URL = 'https://zeroerrorenglish.com'; // Base site domain
+const SITE_URL = 'https://bkandekar.github.io/ZeroErrorEnglish'; // Base site domain
 const POSTS_DIR = path.join(__dirname, 'posts');
 const INDEX_FILE = path.join(__dirname, 'posts-index.json');
 const SITEMAP_FILE = path.join(__dirname, 'sitemap.xml');

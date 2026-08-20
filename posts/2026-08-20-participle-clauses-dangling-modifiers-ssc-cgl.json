@@ -5,11 +5,17 @@
   "excerpt": "Dangling participles sound innocent in conversation but are fatal in competitive exams. Learn how to anchor the subject of reference in 2 seconds.",
   "content": "<p class=\"lead-paragraph\">Have you ever encountered a sentence like: <em>\"Entering the room, the lights went out\"</em>? Who entered the room? The lights? Of course not! Yet the modifier points grammatically to 'the lights'. This is the classic <strong>Dangling Modifier / Unattached Participle</strong> trap.</p>\n\n<h2>The Logic of Participle Clauses</h2>\n<p>When an introductory participle phrase (starting with a V-ing or V3) opens a sentence, it borrows its grammatical subject from the noun immediately following the comma.</p>\n\n<div class=\"rule-example-box\">\n  <div class=\"example-wrong\">❌ <em>Being a rainy day, I decided to stay indoors.</em></div>\n  <div class=\"example-correct\">✅ <em><strong>It being a rainy day</strong>, I decided to stay indoors.</em> (or: <em>As it was a rainy day, I decided to stay indoors.</em>)</div>\n</div>\n\n<p>Why was the first sentence wrong? Because without 'It', the subject for 'Being a rainy day' defaults to 'I', implying 'I was a rainy day'!</p>\n\n<div class=\"book-promo-cta-block\">\n  <div class=\"promo-left\">\n    <span class=\"promo-tag\">Fasttrack English Series — Book 6</span>\n    <h3>Decode Non-Finite Verbs: Infinitives, Gerunds & Participles</h3>\n    <p>Get <strong>Non-Finite Verbs: Infinitives, Gerunds & Participles Demystified</strong> on Amazon Kindle with 150+ advanced error spotting drills.</p>\n    <a href=\"https://www.amazon.in/dp/B0EXAMPLE06\" target=\"_blank\" class=\"btn btn-gold\">Get on Amazon (₹149)</a>\n  </div>\n</div>",
   "category": "Verbs & Tenses",
-  "tags": ["Participles", "Dangling Modifiers", "SSC CGL", "Syntax", "Error Spotting"],
+  "tags": [
+    "Participles",
+    "Dangling Modifiers",
+    "SSC CGL",
+    "Syntax",
+    "Error Spotting"
+  ],
   "coverImage": "img/books/book-06-non-finite-verbs.jpg",
   "author": "ZeroErrorEnglish Editorial Team",
   "readingTime": "4 min read",
-  "status": "scheduled",
+  "status": "published",
   "publishDate": "2026-08-20T10:00:00.000Z",
   "createdDate": "2026-08-15T10:00:00.000Z",
   "featured": false

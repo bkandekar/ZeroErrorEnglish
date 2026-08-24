@@ -18,7 +18,7 @@ const BOOKS_DATA = [
     reviews: 482,
     badge: "Bestseller",
     amazonUrl: "https://www.amazon.in/dp/B0EXAMPLE01",
-    coverImage: "img/books/book-01-subject-verb-agreement.webp",
+    coverImage: "img/book-01-subject-verb-agreement.webp",
     description: "Eliminate error-spotting blunders with the revolutionary 'Bracket Elimination Method'. Covers inverted sentence traps, collective noun anomalies, proximity rule vs. real subject dilemmas, and 250+ previous year questions from 2012-2025.",
     features: [
       "45+ High-Yield Rules with PYQ References (2012-2025)",

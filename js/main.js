@@ -111,6 +111,7 @@ async function fetchPostsIndex() {
     return [];
   }
 }
+
 /* ==========================================================================
    4. Homepage Logic
    ========================================================================== */
@@ -278,7 +279,13 @@ async function initSinglePostReader() {
   const posts = await fetchPostsIndex();
   if (posts.length === 0) return;
 
-  const post = posts.find(p => p.slug === slug || p.id === slug) || posts[0];
+  const post = posts.find(p => p.slug === slug || p.id === slug);
+
+  if (!post) {
+    articleContent.innerHTML = '<p>This article is not published yet. Please check back soon.</p>';
+    if (postTitle) postTitle.textContent = 'Article Not Available';
+    return;
+  }
 
   // Set Page Meta
   document.title = `${post.title} | ZeroErrorEnglish`;

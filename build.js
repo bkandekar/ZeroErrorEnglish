@@ -30,6 +30,19 @@ function runBuild() {
     fs.mkdirSync(POSTS_DIR, { recursive: true });
   }
 
+  // Safety check: catch post files that are missing the .json extension.
+  // Files without .json are silently skipped by the filter below and will
+  // NEVER appear on the website even if their content is perfectly valid.
+  const allFilesInPosts = fs.readdirSync(POSTS_DIR);
+  const nonJsonFiles = allFilesInPosts.filter(f => !f.endsWith('.json') && !f.startsWith('.'));
+
+  if (nonJsonFiles.length > 0) {
+    console.error('⚠️⚠️⚠️ WARNING: /posts/ मध्ये .json extension नसलेल्या फाईल्स सापडल्या — त्या BUILD मध्ये सामीलच होणार नाहीत:');
+    nonJsonFiles.forEach(f => console.error(`   ❌ ${f}`));
+    // ऐच्छिक: build पूर्ण fail करायचा असेल तर पुढची ओळ uncomment करा
+    // process.exit(1);
+  }
+
   const postFiles = fs.readdirSync(POSTS_DIR).filter(file => file.endsWith('.json'));
   console.log(`📁 Found ${postFiles.length} post files in /posts/`);
 

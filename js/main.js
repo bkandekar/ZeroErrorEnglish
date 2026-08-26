@@ -91,19 +91,26 @@ function initActiveNav() {
    ========================================================================== */
 let CACHED_POSTS = null;
 
+function isPostPublished(post) {
+  if (!post || !post.publishDate) return true;
+  const publishDate = new Date(post.publishDate);
+  const now = new Date();
+  return publishDate <= now;
+}
+
 async function fetchPostsIndex() {
   if (CACHED_POSTS) return CACHED_POSTS;
   try {
     const res = await fetch('posts-index.json?t=' + new Date().getTime());
     if (!res.ok) throw new Error('Failed to load posts index');
-    CACHED_POSTS = await res.json();
+    const allPosts = await res.json();
+    CACHED_POSTS = allPosts.filter(isPostPublished);
     return CACHED_POSTS;
   } catch (err) {
     console.warn('Could not fetch posts-index.json, using fallback data:', err);
     return [];
   }
 }
-
 /* ==========================================================================
    4. Homepage Logic
    ========================================================================== */

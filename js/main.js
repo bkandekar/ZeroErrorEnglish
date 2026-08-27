@@ -300,9 +300,16 @@ if (postAuthor) postAuthor.textContent = post.author;
     postCoverImage.alt = post.title;
     postCoverImage.style.display = 'block';
   }
-  // Render HTML Content
+// Render HTML Content — fetched from posts/<slug>.html (no more JSON escaping needed)
   if (articleContent) {
-    articleContent.innerHTML = post.content || `<p>${post.excerpt}</p>`;
+    try {
+      const htmlRes = await fetch(`posts/${post.slug}.html?t=` + new Date().getTime());
+      if (!htmlRes.ok) throw new Error('Content file not found');
+      articleContent.innerHTML = await htmlRes.text();
+    } catch (err) {
+      console.warn(`Could not fetch posts/${post.slug}.html, falling back:`, err);
+      articleContent.innerHTML = post.content || `<p>${post.excerpt}</p>`;
+    }
   }
 
   // Generate Table of Contents

@@ -3,7 +3,7 @@
  * Plain Node.js with zero dependencies
  *
  * Responsibilities:
- * 1. Reads every JSON file in `/posts/`
+ * 1. Reads every JSON file in `/posts/` (metadata only — content now lives in matching .html files)
  * 2. Auto-transitions any "scheduled" posts whose publishDate has arrived to "published" and updates the file
  * 3. Compiles published posts (publishDate <= now) into root `posts-index.json`
  * 4. Regenerates `sitemap.xml`, `rss.xml`, and `robots.txt`
@@ -30,21 +30,20 @@ function runBuild() {
     fs.mkdirSync(POSTS_DIR, { recursive: true });
   }
 
-  // Safety check: catch post files that are missing the .json extension.
-  // Files without .json are silently skipped by the filter below and will
-  // NEVER appear on the website even if their content is perfectly valid.
+  // Safety check: catch stray files that are neither .json (metadata) nor .html (content).
+  // These will be silently skipped by the filters below and will NEVER appear on the site.
   const allFilesInPosts = fs.readdirSync(POSTS_DIR);
-  const nonJsonFiles = allFilesInPosts.filter(f => !f.endsWith('.json') && !f.startsWith('.'));
+  const strayFiles = allFilesInPosts.filter(f => !f.endsWith('.json') && !f.endsWith('.html') && !f.startsWith('.'));
 
-  if (nonJsonFiles.length > 0) {
-    console.error('⚠️⚠️⚠️ WARNING: /posts/ मध्ये .json extension नसलेल्या फाईल्स सापडल्या — त्या BUILD मध्ये सामीलच होणार नाहीत:');
-    nonJsonFiles.forEach(f => console.error(`   ❌ ${f}`));
+  if (strayFiles.length > 0) {
+    console.error('⚠️⚠️⚠️ WARNING: /posts/ मध्ये .json किंवा .html नसलेल्या फाईल्स सापडल्या — त्या BUILD मध्ये सामीलच होणार नाहीत:');
+    strayFiles.forEach(f => console.error(`   ❌ ${f}`));
     // ऐच्छिक: build पूर्ण fail करायचा असेल तर पुढची ओळ uncomment करा
     // process.exit(1);
   }
 
   const postFiles = fs.readdirSync(POSTS_DIR).filter(file => file.endsWith('.json'));
-  console.log(`📁 Found ${postFiles.length} post files in /posts/`);
+  console.log(`📁 Found ${postFiles.length} post metadata files in /posts/`);
 
   const allPosts = [];
   let updatedScheduledCount = 0;
@@ -64,6 +63,14 @@ function runBuild() {
           fs.writeFileSync(filePath, JSON.stringify(post, null, 2), 'utf8');
           updatedScheduledCount++;
         }
+      }
+
+      // Safety check: every published post (unless it still carries an old inline
+      // "content" field) must have a matching posts/<slug>.html content file.
+      const slug = post.slug || post.id;
+      const htmlPath = path.join(POSTS_DIR, `${slug}.html`);
+      if (!post.content && !fs.existsSync(htmlPath)) {
+        console.error(`⚠️⚠️⚠️ WARNING: "${filename}" साठी posts/${slug}.html सापडली नाही — या पोस्टचा content रिकामा दिसेल!`);
       }
 
       allPosts.push({ ...post, _filename: filename });
@@ -87,7 +94,9 @@ function runBuild() {
 
   console.log(`📰 Total active published posts: ${publishedPosts.length}`);
 
-  // Create lightweight index for frontend (stripping heavy full content to keep index small & fast)
+  // Create lightweight index for frontend.
+  // NOTE: "content" is only included here for OLD posts that still carry it inline.
+  // New posts leave it out entirely — post.html fetches posts/<slug>.html directly at runtime.
   const indexData = publishedPosts.map(p => ({
     id: p.id,
     slug: p.slug || p.id,
@@ -101,7 +110,7 @@ function runBuild() {
     publishDate: p.publishDate,
     createdDate: p.createdDate,
     featured: Boolean(p.featured),
-    content: p.content // Include content so single-file static loading works smoothly
+    ...(p.content ? { content: p.content } : {}) // legacy fallback only
   }));
 
   // Write posts-index.json

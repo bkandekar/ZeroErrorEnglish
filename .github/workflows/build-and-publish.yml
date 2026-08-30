@@ -1,0 +1,45 @@
+name: Build & Publish Scheduled Posts
+
+# 1) कोणी /posts/ मध्ये नवीन फाईल push केली की लगेच चालेल
+# 2) दर 15 मिनिटांनी आपोआप चालेल — म्हणजे scheduled पोस्टची publishDate वेळ
+#    उलटली की तासभरही न थांबता ती आपोआप live होईल
+# 3) गरज पडल्यास "Run workflow" बटणाने manually सुद्धा चालवता येईल
+on:
+  push:
+    branches: [main]
+    paths:
+      - "posts/**"
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run build.js
+        run: node build.js
+
+      - name: Commit and push if anything changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add posts-index.json sitemap.xml rss.xml robots.txt posts/*.json
+          if git diff --cached --quiet; then
+            echo "No changes to publish — nothing to commit."
+          else
+            git commit -m "chore: auto-publish scheduled posts [skip ci]"
+            git push
+          fi
+
